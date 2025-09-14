@@ -7,36 +7,37 @@ on:
 
 jobs:
   build-windows:
-    runs-on: windows-2022  # Explicitly use latest stable Windows image
+    runs-on: windows-2022  # Latest stable runner for Windows 10/11 compatibility
 
     steps:
-      - name: Checkout repo
+      - name: 🧾 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: 🐍 Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Upgrade pip
+      - name: 🚀 Upgrade pip
         run: python -m pip install --upgrade pip
         shell: pwsh
 
-      - name: Install pipwin and PyAudio (prebuilt wheel)
+      - name: 🔊 Install PyAudio from prebuilt wheel
         run: |
           python -m pip install pipwin
+          pipwin refresh
           pipwin install pyaudio
         shell: pwsh
 
-      - name: Install other dependencies
+      - name: 📦 Install other dependencies
         run: python -m pip install -r requirements.txt
         shell: pwsh
 
-      - name: Install PyInstaller
+      - name: 🛠️ Install PyInstaller
         run: python -m pip install --upgrade pyinstaller
         shell: pwsh
 
-      - name: Build EXE with PyInstaller
+      - name: 🏗️ Build EXE with PyInstaller
         run: |
           pyinstaller ^
             --onefile ^
@@ -48,11 +49,11 @@ jobs:
             screen_recorder.py
         shell: pwsh
 
-      - name: List dist folder
+      - name: 📂 List dist folder contents
         run: dir dist
         shell: pwsh
 
-      - name: Upload built EXE
+      - name: 📤 Upload built EXE as artifact
         uses: actions/upload-artifact@v4
         with:
           name: screen-streamer-exe
