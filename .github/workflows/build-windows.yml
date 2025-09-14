@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-windows:
-    runs-on: windows-2022  # Latest stable runner for Windows 10/11 compatibility
+    runs-on: windows-2022
 
     steps:
       - name: 🧾 Checkout repository
@@ -22,11 +22,9 @@ jobs:
         run: python -m pip install --upgrade pip
         shell: pwsh
 
-      - name: 🔊 Install PyAudio from prebuilt wheel
+      - name: 🔊 Install PyAudio manually from wheel
         run: |
-          python -m pip install pipwin
-          pipwin refresh
-          pipwin install pyaudio
+          python -m pip install https://github.com/intxcc/pyaudio_portaudio/releases/download/v0.2.11-cp310/pyaudio‑0.2.11‑cp310‑cp310‑win_amd64.whl
         shell: pwsh
 
       - name: 📦 Install other dependencies
