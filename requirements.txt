@@ -1,0 +1,10 @@
+opencv-python
+mss
+numpy
+PySimpleGUI
+moviepy
+sounddevice
+soundfile
+imageio-ffmpeg
+pillow
+pyinstaller
