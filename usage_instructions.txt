@@ -1,0 +1,76 @@
+SCREEN RECORDER - USAGE INSTRUCTIONS
+===================================
+
+RUNNING IN REPLIT (DEVELOPMENT/TESTING):
+----------------------------------------
+1. The application runs with GUI simulation in this environment
+2. Click the "Screen Recorder" workflow button to start the application
+3. You'll see a warning about environment limitations - this is normal
+4. Test all GUI controls to verify functionality
+5. Recording will create demo files for testing purposes
+
+RUNNING ON WINDOWS 10:
+---------------------
+1. Copy screen_recorder.py to your Windows 10 machine
+2. Install Python 3.11+ and dependencies:
+   pip install opencv-python pyautogui numpy pyaudio pillow moviepy imageio-ffmpeg
+3. Run: python screen_recorder.py
+4. The GUI will open with full screen recording capabilities
+
+APPLICATION FEATURES:
+-------------------
+
+1. RECORDING QUALITY OPTIONS:
+   - HD (720p): 1280x720 resolution
+   - Full HD (1080p): 1920x1080 resolution (default)
+   - 4K (2160p): 3840x2160 resolution
+   - Automatically scales based on your screen size
+
+2. RECORDING CONTROLS:
+   - Start Recording: Begin capturing screen and audio
+   - Pause: Temporarily stop recording (keeps session active)
+   - Resume: Continue paused recording
+   - Stop Recording: End session and save file
+
+3. AUDIO OPTIONS:
+   - No Audio: Record video only
+   - System Microphone: Record from default microphone
+   - External Headphone Mic: Detect and use headset microphone
+
+4. OUTPUT:
+   - Files saved as MP4 format with timestamp
+   - Automatic file naming: screen_recording_YYYYMMDD_HHMMSS.mp4
+   - Save location displayed after recording completion
+   - Files saved in the same directory as the application
+
+HOW TO USE:
+----------
+1. Launch the application
+2. Select your preferred recording quality
+3. Choose audio input option
+4. Click "Start Recording" when ready
+5. Use "Pause" and "Resume" as needed during recording
+6. Click "Stop Recording" when finished
+7. Check the displayed file location for your recording
+
+KEYBOARD SHORTCUTS:
+------------------
+- Alt+F4: Close application (prompts to stop recording if active)
+- Recording controls are mouse-only for safety
+
+SYSTEM REQUIREMENTS:
+-------------------
+- Windows 10 (64-bit recommended)
+- 4GB RAM minimum (8GB+ for 4K recording)
+- 500MB+ free disk space per minute of recording
+- Microphone (optional, for audio recording)
+- DirectX compatible graphics card
+
+TROUBLESHOOTING:
+---------------
+- If recording seems choppy: Lower the resolution setting
+- If audio doesn't record: Check microphone permissions in Windows
+- If file won't save: Ensure adequate disk space
+- If application won't start: Run as administrator
+
+For technical support, check the build_instructions.txt file for detailed PyInstaller packaging information.

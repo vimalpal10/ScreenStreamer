@@ -1,0 +1,83 @@
+WINDOWS 10 SCREEN RECORDER - BUILD INSTRUCTIONS
+==============================================
+
+Prerequisites:
+1. Windows 10 machine with Python 3.11+ installed
+2. All dependencies installed via pip
+
+STEP 1: Install Dependencies
+---------------------------
+Run the following command in Command Prompt or PowerShell:
+
+pip install opencv-python pyautogui numpy pyaudio pillow moviepy imageio-ffmpeg pyinstaller
+
+STEP 2: Build Executable with PyInstaller
+----------------------------------------
+Navigate to the directory containing screen_recorder.py and run:
+
+pyinstaller --onefile --windowed --name "ScreenRecorder" screen_recorder.py
+
+Optional flags for better packaging:
+- --icon=icon.ico (if you have an icon file)
+- --add-data "additional_files;." (for additional data files)
+
+STEP 3: Advanced Build Command (Recommended)
+-------------------------------------------
+For a more robust build that includes all dependencies:
+
+pyinstaller ^
+    --onefile ^
+    --windowed ^
+    --name "ScreenRecorder" ^
+    --hidden-import=cv2 ^
+    --hidden-import=numpy ^
+    --hidden-import=pyautogui ^
+    --hidden-import=pyaudio ^
+    --hidden-import=PIL ^
+    --hidden-import=moviepy.editor ^
+    --hidden-import=imageio ^
+    --hidden-import=imageio_ffmpeg ^
+    --collect-all cv2 ^
+    --collect-all numpy ^
+    --collect-all moviepy ^
+    --collect-all imageio ^
+    --collect-all imageio_ffmpeg ^
+    screen_recorder.py
+
+STEP 4: Test the Executable
+---------------------------
+1. Navigate to the 'dist' folder created by PyInstaller
+2. Run ScreenRecorder.exe
+3. Test all features:
+   - Recording quality selection
+   - Audio input options
+   - Start/Stop/Pause/Resume controls
+   - File saving and location display
+
+STEP 5: Distribute
+-----------------
+The final executable will be in the 'dist' folder:
+- ScreenRecorder.exe (standalone executable)
+- No Python installation required on target machines
+- All dependencies are bundled
+
+Troubleshooting:
+--------------
+1. If audio doesn't work: Install Microsoft Visual C++ Redistributable
+2. If video encoding fails: Ensure codec support on target system
+3. For smaller file size: Use --exclude-module flags for unused modules
+
+File Size Optimization:
+---------------------
+To reduce the final executable size:
+
+pyinstaller ^
+    --onefile ^
+    --windowed ^
+    --name "ScreenRecorder" ^
+    --exclude-module matplotlib ^
+    --exclude-module scipy ^
+    --exclude-module pandas ^
+    screen_recorder.py
+
+Expected final size: 80-120 MB (including all video/audio codecs)
