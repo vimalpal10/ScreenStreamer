@@ -22,9 +22,9 @@ jobs:
         run: python -m pip install --upgrade pip
         shell: pwsh
 
-      - name: 🔊 Install PyAudio manually from wheel
+      - name: 🔊 Install PyAudio manually from correct wheel
         run: |
-          python -m pip install https://github.com/intxcc/pyaudio_portaudio/releases/download/v0.2.11-cp310/pyaudio‑0.2.11‑cp310‑cp310‑win_amd64.whl
+          python -m pip install https://github.com/intxcc/pyaudio_portaudio/releases/download/v0.2.11-cp310/pyaudio-0.2.11-cp310-cp310-win_amd64.whl
         shell: pwsh
 
       - name: 📦 Install other dependencies
