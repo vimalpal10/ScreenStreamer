@@ -7,7 +7,8 @@ on:
 
 jobs:
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-2022  # Explicitly use latest stable Windows image
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -24,30 +25,35 @@ jobs:
       - name: Install pipwin and PyAudio (prebuilt wheel)
         run: |
           python -m pip install pipwin
-          # pipwin installs the prebuilt PyAudio wheel on Windows to avoid build errors
           pipwin install pyaudio
         shell: pwsh
 
-      - name: Install rest of requirements
+      - name: Install other dependencies
         run: python -m pip install -r requirements.txt
         shell: pwsh
 
-      - name: Ensure PyInstaller present
+      - name: Install PyInstaller
         run: python -m pip install --upgrade pyinstaller
         shell: pwsh
 
-      - name: Build exe with PyInstaller
+      - name: Build EXE with PyInstaller
         run: |
-          # Use --noupx to avoid UPX packing (less false positives), add hidden-import for pyaudio
-          pyinstaller --onefile --windowed --noupx --hidden-import=pyaudio screen_recorder.py
+          pyinstaller ^
+            --onefile ^
+            --windowed ^
+            --noupx ^
+            --clean ^
+            --name ScreenStreamer ^
+            --hidden-import=pyaudio ^
+            screen_recorder.py
         shell: pwsh
 
       - name: List dist folder
         run: dir dist
         shell: pwsh
 
-      - name: Upload built exe (artifact)
+      - name: Upload built EXE
         uses: actions/upload-artifact@v4
         with:
-          name: screen-recorder-exe
-          path: dist/*.exe
+          name: screen-streamer-exe
+          path: dist/ScreenStreamer.exe
