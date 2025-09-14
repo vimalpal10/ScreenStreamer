@@ -8,3 +8,4 @@ soundfile
 imageio-ffmpeg
 pillow
 pyinstaller
+pyaudio
