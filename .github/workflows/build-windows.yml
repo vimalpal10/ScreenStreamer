@@ -21,12 +21,25 @@ jobs:
         run: python -m pip install --upgrade pip
         shell: pwsh
 
-      - name: Install requirements
+      - name: Install pipwin and PyAudio (prebuilt wheel)
+        run: |
+          python -m pip install pipwin
+          # pipwin installs the prebuilt PyAudio wheel on Windows to avoid build errors
+          pipwin install pyaudio
+        shell: pwsh
+
+      - name: Install rest of requirements
         run: python -m pip install -r requirements.txt
         shell: pwsh
 
+      - name: Ensure PyInstaller present
+        run: python -m pip install --upgrade pyinstaller
+        shell: pwsh
+
       - name: Build exe with PyInstaller
-        run: pyinstaller --onefile --windowed screen_recorder.py
+        run: |
+          # Use --noupx to avoid UPX packing (less false positives), add hidden-import for pyaudio
+          pyinstaller --onefile --windowed --noupx --hidden-import=pyaudio screen_recorder.py
         shell: pwsh
 
       - name: List dist folder
